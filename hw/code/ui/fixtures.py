@@ -2,6 +2,8 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from ui.pages.base_page import BasePage
+from ui.pages.main_page import MainPage
+from ui.pages.parner_page import PartnerPage
 
 
 @pytest.fixture()
@@ -37,3 +39,14 @@ def driver(config):
 @pytest.fixture
 def base_page(driver):
     return BasePage(driver=driver)
+
+
+@pytest.fixture
+def main_page(driver):
+    return MainPage(driver=driver)
+
+
+@pytest.fixture
+def partner_page(driver):
+    driver.get(PartnerPage.url)
+    return PartnerPage(driver=driver)
