@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
+from ui.pages.news_page import NewsPage
+from ui.pages.cases_page import CasesPage
 from ui.pages.upvote_page import UpvotePage
 from ui.pages.partner_page import PartnerPage
 from ui.pages.auth_page import AuthPage
@@ -46,6 +48,18 @@ def base_page(driver):
 @pytest.fixture
 def main_page(driver):
     return MainPage(driver=driver)
+
+
+@pytest.fixture
+def news_page(driver):
+    driver.get(NewsPage.url)
+    return NewsPage(driver=driver)
+
+
+@pytest.fixture
+def cases_page(driver):
+    driver.get(CasesPage.url)
+    return CasesPage(driver=driver)
 
 
 @pytest.fixture
