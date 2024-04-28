@@ -5,6 +5,7 @@ from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
 from ui.pages.news_page import NewsPage
 from ui.pages.cases_page import CasesPage
+from ui.pages.events_page import EventsPage
 from ui.pages.upvote_page import UpvotePage
 from ui.pages.partner_page import PartnerPage
 from ui.pages.auth_page import AuthPage
@@ -60,6 +61,12 @@ def news_page(driver):
 def cases_page(driver):
     driver.get(CasesPage.url)
     return CasesPage(driver=driver)
+
+
+@pytest.fixture
+def events_page(driver):
+    driver.get(EventsPage.url)
+    return EventsPage(driver=driver)
 
 
 @pytest.fixture

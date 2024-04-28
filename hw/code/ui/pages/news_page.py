@@ -1,13 +1,10 @@
-from ui.pages.base_page import BasePage
+from ui.pages.base_sections_page import BaseSectionsPage
 from ui.locators.news_page_locators import NewsPageLocators
 
 
-class NewsPage(BasePage):
+class NewsPage(BaseSectionsPage):
     locators = NewsPageLocators()
     url = 'https://ads.vk.com/news'
-
-    def get_page_title(self):
-        return self.find(self.locators.PAGE_TITLE).text
 
     def get_news_title(self):
         return self.find(self.locators.NEWS_TITLE).text

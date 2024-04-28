@@ -1,13 +1,10 @@
-from ui.pages.base_page import BasePage
+from ui.pages.base_sections_page import BaseSectionsPage
 from ui.locators.cases_page_locators import CasesPageLocators
 
 
-class CasesPage(BasePage):
+class CasesPage(BaseSectionsPage):
     locators = CasesPageLocators()
     url = 'https://ads.vk.com/cases'
-
-    def get_page_title(self):
-        return self.find(self.locators.PAGE_TITLE).text
 
     def get_case_title(self):
         return self.find(self.locators.CASE_TITLE).text
