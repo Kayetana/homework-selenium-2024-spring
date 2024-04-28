@@ -3,7 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
-from ui.pages.parner_page import PartnerPage
+from ui.pages.upvote_page import UpvotePage
+from ui.pages.partner_page import PartnerPage
+from ui.pages.auth_page import AuthPage
 
 
 @pytest.fixture()
@@ -47,6 +49,18 @@ def main_page(driver):
 
 
 @pytest.fixture
+def upvote_page(driver):
+    driver.get(UpvotePage.url)
+    return UpvotePage(driver=driver)
+
+
+@pytest.fixture
 def partner_page(driver):
     driver.get(PartnerPage.url)
     return PartnerPage(driver=driver)
+
+
+@pytest.fixture
+def auth_page(driver):
+    driver.get(AuthPage.url)
+    return AuthPage(driver=driver)

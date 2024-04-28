@@ -25,7 +25,10 @@ class BasePage(object):
         raise PageNotOpenedException(f'{self.url} did not open in {timeout} sec, current url {self.driver.current_url}')
 
     def close_cookie_banner(self):
-        self.click(self.locators.COOKIE_BUTTON)
+        try:
+            self.click(self.locators.COOKIE_BUTTON)
+        except:
+            pass
 
     def __init__(self, driver):
         self.driver = driver
@@ -39,6 +42,9 @@ class BasePage(object):
 
     def find(self, locator, timeout=None) -> WebElement:
         return self.wait(timeout).until(ec.presence_of_element_located(locator))
+
+    def find_multiple(self, locator, timeout=None):
+        return self.wait(timeout).until(ec.visibility_of_all_elements_located(locator))
 
     @allure.step('Click')
     def click(self, locator, timeout=None) -> WebElement:
