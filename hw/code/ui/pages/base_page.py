@@ -1,6 +1,7 @@
 import time
 
 import allure
+from selenium.common import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -27,7 +28,7 @@ class BasePage(object):
     def close_cookie_banner(self):
         try:
             self.click(self.locators.COOKIE_BUTTON)
-        except:
+        except TimeoutException:
             pass
 
     def __init__(self, driver):
@@ -65,3 +66,17 @@ class BasePage(object):
     def hover(self, locator, timeout=5):
         elem = self.wait(timeout).until(ec.presence_of_element_located(locator))
         ActionChains(self.driver).move_to_element(elem).perform()
+
+    def became_invisible(self, locator, timeout=None):
+        try:
+            self.wait(timeout).until(ec.invisibility_of_element(locator))
+            return True
+        except TimeoutException:
+            return False
+
+    def became_visible(self, locator, timeout=None):
+        try:
+            self.wait(timeout).until(ec.visibility_of_element_located(locator))
+            return True
+        except TimeoutException:
+            return False

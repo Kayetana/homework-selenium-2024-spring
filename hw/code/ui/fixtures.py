@@ -8,7 +8,12 @@ from ui.pages.cases_page import CasesPage
 from ui.pages.events_page import EventsPage
 from ui.pages.upvote_page import UpvotePage
 from ui.pages.partner_page import PartnerPage
-from ui.pages.auth_page import AuthPage
+from ui.pages.registration_page import RegistrationPage
+from ui.pages.hq_page import HqPage
+from ui.pages.audience_page import AudiencePage
+from ui.pages.campaigns_page import CampaignsPage
+import os
+from dotenv import load_dotenv
 
 
 @pytest.fixture()
@@ -82,6 +87,36 @@ def partner_page(driver):
 
 
 @pytest.fixture
-def auth_page(driver):
-    driver.get(AuthPage.url)
-    return AuthPage(driver=driver)
+def registration_page(driver):
+    driver.get(RegistrationPage.url)
+    return RegistrationPage(driver=driver)
+
+
+@pytest.fixture(scope='session')
+def credentials():
+    load_dotenv()
+    return os.getenv('LOGIN'), os.getenv('PASSWORD')
+
+
+@pytest.fixture
+def registration_new_page(registration_page, credentials):
+    registration_page.login(*credentials)
+    registration_page.go_to_new_cabinet_registration()
+
+
+@pytest.fixture
+def hq_page(credentials, driver, registration_page):
+    registration_page.login(*credentials)
+    return HqPage(driver=driver)
+
+
+@pytest.fixture
+def campaigns_page(hq_page):
+    hq_page.driver.get(CampaignsPage.url)
+    return CampaignsPage(driver=hq_page.driver)
+
+
+@pytest.fixture
+def audience_page(hq_page):
+    hq_page.driver.get(AudiencePage.url)
+    return AudiencePage(driver=hq_page.driver)
