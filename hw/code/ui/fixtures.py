@@ -12,6 +12,7 @@ from ui.pages.registration_page import RegistrationPage
 from ui.pages.hq_page import HqPage
 from ui.pages.audience_page import AudiencePage
 from ui.pages.campaigns_page import CampaignsPage
+from ui.pages.budget_page import BudgetPage
 import os
 from dotenv import load_dotenv
 
@@ -120,3 +121,10 @@ def campaigns_page(hq_page):
 def audience_page(hq_page):
     hq_page.driver.get(AudiencePage.url)
     return AudiencePage(driver=hq_page.driver)
+
+
+@pytest.fixture
+def budget_page(hq_page):
+    hq_page.driver.get(BudgetPage.url)
+    return BudgetPage(driver=hq_page.driver)
+
