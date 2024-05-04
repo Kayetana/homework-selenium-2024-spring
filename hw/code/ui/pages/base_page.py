@@ -53,7 +53,7 @@ class BasePage(object):
         elem.click()
         return elem
 
-    def scroll_and_click(self, locator, timeout=5) -> WebElement:
+    def scroll_and_click(self, locator, timeout=None) -> WebElement:
         elem = self.wait(timeout).until(ec.presence_of_element_located(locator))
         ActionChains(self.driver).move_to_element(elem).click(elem).perform()
         return elem
@@ -63,7 +63,7 @@ class BasePage(object):
         assert len(handles) > 1
         self.driver.switch_to.window(handles[1])
 
-    def hover(self, locator, timeout=5):
+    def hover(self, locator, timeout=None):
         elem = self.wait(timeout).until(ec.presence_of_element_located(locator))
         ActionChains(self.driver).move_to_element(elem).perform()
 
