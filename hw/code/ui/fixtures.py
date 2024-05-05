@@ -9,7 +9,7 @@ from ui.pages.events_page import EventsPage
 from ui.pages.upvote_page import UpvotePage
 from ui.pages.partner_page import PartnerPage
 from ui.pages.registration_page import RegistrationPage
-from ui.pages.hq_page import HqPage
+from ui.pages.cabinet_page import CabinetPage
 from ui.pages.audience_page import AudiencePage
 from ui.pages.campaigns_page import CampaignsPage
 from ui.pages.budget_page import BudgetPage
@@ -107,30 +107,30 @@ def registration_new_page(registration_page, credentials):
 
 
 @pytest.fixture
-def hq_page(credentials, driver, registration_page):
+def cabinet_page(credentials, driver, registration_page):
     registration_page.login(*credentials)
-    return HqPage(driver=driver)
+    return CabinetPage(driver=driver)
 
 
 @pytest.fixture
-def campaigns_page(hq_page):
-    hq_page.driver.get(CampaignsPage.url)
-    return CampaignsPage(driver=hq_page.driver)
+def campaigns_page(cabinet_page):
+    cabinet_page.driver.get(CampaignsPage.url)
+    return CampaignsPage(driver=cabinet_page.driver)
 
 
 @pytest.fixture
-def audience_page(hq_page):
-    hq_page.driver.get(AudiencePage.url)
-    return AudiencePage(driver=hq_page.driver)
+def audience_page(cabinet_page):
+    cabinet_page.driver.get(AudiencePage.url)
+    return AudiencePage(driver=cabinet_page.driver)
 
 
 @pytest.fixture
-def budget_page(hq_page):
-    hq_page.driver.get(BudgetPage.url)
-    return BudgetPage(driver=hq_page.driver)
+def budget_page(cabinet_page):
+    cabinet_page.driver.get(BudgetPage.url)
+    return BudgetPage(driver=cabinet_page.driver)
 
 
 @pytest.fixture
-def settings_page(hq_page):
-    hq_page.driver.get(SettingsPage.url)
-    return SettingsPage(driver=hq_page.driver)
+def settings_page(cabinet_page):
+    cabinet_page.driver.get(SettingsPage.url)
+    return SettingsPage(driver=cabinet_page.driver)

@@ -31,7 +31,10 @@ class CampaignsPageLocators(BasePageLocators):
     IMAGE_ITEM = (By.XPATH, "//*[contains(@class, 'ImageItems_image__')]")
     SELECTED_IMAGE = (By.XPATH, "//*[contains(@class, 'AdMediaPreview_loaded__')]")
 
-    TITLE = (By.XPATH, "//*[@data-testid='text-field'][0]")
-    DESCRIPTION = (By.XPATH, "//*[@data-testid='text-field'][1]")
+    TITLE = (By.XPATH, "//*[contains(@class, 'TextRole_textFieldWrap__')]//input")
+    DESCRIPTION = (By.XPATH, "//*[contains(@class, 'TextRole_textFieldWrap__')]//textarea")
+
+    PREVIEW_TITLE = (By.XPATH, "//*[contains(@class, 'preview_preview__')]//h3[contains(@class, 'Header_name__')]")
+    PREVIEW_DESCRIPTION = (By.XPATH, "//*[contains(@class, 'preview_preview__')]//*[contains(@class, 'Default_text__')]")
 
     PUBLISH_BUTTON = (By.XPATH, "//*[contains(@class, 'vkuiButton__content') and text()='Опубликовать']")
