@@ -1,12 +1,15 @@
 import time
-
 from base_case import BaseCase
 
 
 class TestUpvotePage(BaseCase):
+    def test_upvote_modal_page_became_visible(self, upvote_page):
+        upvote_page.click_add_idea_button()
+        assert upvote_page.upvote_modal_page_became_visible()
+
     def test_open_comments(self, upvote_page):
         upvote_page.click_comment_button()
-        assert upvote_page.comments_is_on_page()
+        assert upvote_page.comments_became_visible()
 
     def test_check_comments_count(self, upvote_page):
         upvote_page.click_comment_button()
@@ -26,31 +29,12 @@ class TestUpvotePage(BaseCase):
 
     def test_open_theme_dropdown(self, upvote_page):
         upvote_page.open_filter_dropdown('Любая тема')
-
-        themes = [
-            'Лидформы',
-            'Сообщества',
-            'Форум идей',
-            'Сайты',
-            'Каталог товаров',
-            'Мобильные приложения',
-            'Другое'
-        ]
-
-        assert upvote_page.filter_dropdown_contain_items(themes)
+        assert upvote_page.filter_dropdown_contain_items(upvote_page.THEMES)
 
     def test_open_status_dropdown(self, upvote_page):
         upvote_page.click_cancel_filter_button()
         upvote_page.open_filter_dropdown('Любой статус')
-
-        statuses = [
-            'Голосование',
-            'Уже в работе',
-            'Реализована',
-            'Отклонено'
-        ]
-
-        assert upvote_page.filter_dropdown_contain_items(statuses)
+        assert upvote_page.filter_dropdown_contain_items(upvote_page.STATUSES)
 
     def test_filter_theme(self, upvote_page):
         upvote_page.open_filter_dropdown('Любая тема')

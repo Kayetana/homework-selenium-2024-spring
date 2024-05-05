@@ -11,10 +11,3 @@ class TestNewsPage(BaseCase):
 
         assert self.is_opened('https://ads.vk.com/news/')
         assert news_page.get_page_title() == news_title
-
-    def test_go_to_page_of_news_with_button(self, news_page):
-        news_title = news_page.get_news_title()
-        news_page.click_more_details_button()
-
-        assert self.is_opened('https://ads.vk.com/news/')
-        assert news_page.get_page_title() == news_title

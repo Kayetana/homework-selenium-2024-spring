@@ -97,7 +97,14 @@ def registration_page(driver):
 @pytest.fixture(scope='session')
 def credentials():
     load_dotenv()
+    print('creds', os.getenv('LOGIN'), os.getenv('PASSWORD'))
     return os.getenv('LOGIN'), os.getenv('PASSWORD')
+
+
+@pytest.fixture(scope='session')
+def credentials_with_cabinet():
+    load_dotenv()
+    return os.getenv('LOGIN_WITH_CABINET'), os.getenv('PASSWORD_WITH_CABINET')
 
 
 @pytest.fixture
@@ -107,8 +114,8 @@ def registration_new_page(registration_page, credentials):
 
 
 @pytest.fixture
-def cabinet_page(credentials, driver, registration_page):
-    registration_page.login(*credentials)
+def cabinet_page(credentials_with_cabinet, driver, registration_page):
+    registration_page.login(*credentials_with_cabinet)
     return CabinetPage(driver=driver)
 
 

@@ -57,4 +57,3 @@ class MainPageLocators(BasePageLocators):
     CASE_ITEM_TITLE = (By.XPATH, "//*[contains(@class, 'Case_title__')]")
 
     WEBINAR_ITEM = (By.XPATH, "//*[contains(@class, 'GetStarted_wrapper__')]")
-    WEBINAR_ITEM_BUTTON = (By.XPATH, "//*[contains(@class, 'GetStarted_button__')]")

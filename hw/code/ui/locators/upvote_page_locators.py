@@ -3,6 +3,12 @@ from ui.locators.base_page_locators import BasePageLocators
 
 
 class UpvotePageLocators(BasePageLocators):
+    ADD_IDEA = (By.XPATH, "//*[contains(@class, 'vkuiButton__content') and text()='Предложить идею']")
+    UPVOTE_MODAL_PAGE = (
+        By.XPATH,
+        "//*[contains(@class, 'vkuiModalCardBase__header') and text()='Как стать участником форума?']"
+    )
+
     COMMENT_BUTTON = (By.XPATH, "//*[contains(@class, 'ButtonComment_button__')]")
     COMMENT_ITEM = (By.XPATH, "//*[contains(@class, 'Comment_cell__')]")
 

@@ -6,11 +6,8 @@ class EventsPage(BaseSectionsPage):
     locators = EventsPageLocators()
     url = 'https://ads.vk.com/events'
 
-    def get_event_title(self):
+    def get_event_title(self) -> str:
         return self.find(self.locators.EVENT_TITLE).text
 
     def click_event_item(self):
         self.click(self.locators.EVENT_ITEM)
-
-    def click_more_details_button(self):
-        self.click(self.locators.EVENT_MORE_DETAILS_BUTTON)

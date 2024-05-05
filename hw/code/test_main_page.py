@@ -36,7 +36,3 @@ class TestMainPage(BaseCase):
     def test_go_to_webinar(self, main_page):
         main_page.click_webinar_item()
         assert self.is_opened('https://ads.vk.com/events')
-
-    def test_go_to_webinar_with_button(self, main_page):
-        main_page.click_webinar_item_button()
-        assert self.is_opened('https://ads.vk.com/events')

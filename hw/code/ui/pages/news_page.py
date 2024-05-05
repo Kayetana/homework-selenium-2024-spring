@@ -11,6 +11,3 @@ class NewsPage(BaseSectionsPage):
 
     def click_news_item(self):
         self.click(self.locators.NEWS_ITEM)
-
-    def click_more_details_button(self):
-        self.click(self.locators.NEWS_MORE_DETAILS_BUTTON)

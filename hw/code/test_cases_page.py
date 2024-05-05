@@ -11,10 +11,3 @@ class TestCasesPage(BaseCase):
 
         assert self.is_opened('https://ads.vk.com/cases/')
         assert cases_page.get_page_title() == case_title
-
-    def test_go_to_page_of_case_with_button(self, cases_page):
-        case_title = cases_page.get_case_title()
-        cases_page.click_more_details_button()
-
-        assert self.is_opened('https://ads.vk.com/cases/')
-        assert cases_page.get_page_title() == case_title

@@ -14,30 +14,12 @@ class TestPartnerPage(BaseCase):
 
     def test_formats(self, partner_page):
         partner_page.click_format_tab('Для приложений')
-
-        app_formats = [
-            'Баннер',
-            'Нативный формат',
-            'Полноэкранный блок',
-            'Видео за вознаграждение'
-        ]
-
-        assert partner_page.page_contain_formats(app_formats)
+        assert partner_page.page_contain_formats(partner_page.APP_FORMATS)
 
         partner_page.click_format_tab('Для сайтов')
+        assert partner_page.page_contain_formats(partner_page.WEBSITE_FORMATS)
 
-        website_formats = [
-            'Баннер',
-            'Instream',
-            'Адаптивный блок',
-            'InPage',
-            'Полноэкранный блок',
-            'Sticky-баннер'
-        ]
-
-        assert partner_page.page_contain_formats(website_formats)
-
-    def test_submit_button_is_disabled(self, partner_page):
+    def test_submit_button_disabled_by_default(self, partner_page):
         assert partner_page.submit_button_is_disabled()
 
     def test_submit_button_enabled_after_filling_form(self, partner_page):
@@ -47,4 +29,4 @@ class TestPartnerPage(BaseCase):
     def test_submit_message_after_submitting_form(self, partner_page):
         partner_page.enter_name_and_email('test', 'test')
         partner_page.click_submit_button()
-        assert partner_page.submit_message_is_on_page()
+        assert partner_page.submit_message_became_visible()
