@@ -90,15 +90,15 @@ def partner_page(driver):
 
 
 @pytest.fixture(scope='session')
-def credentials():
+def credentials_without_cabinet():
     load_dotenv()
-    return os.getenv('LOGIN'), os.getenv('PASSWORD')
+    return os.getenv('LOGIN_WITHOUT_CABINET'), os.getenv('PASSWORD_WITHOUT_CABINET')
 
 
 @pytest.fixture(scope='session')
 def credentials_with_cabinet():
     load_dotenv()
-    return os.getenv('LOGIN_WITH_CABINET'), os.getenv('PASSWORD_WITH_CABINET')
+    return os.getenv('LOGIN'), os.getenv('PASSWORD')
 
 
 @pytest.fixture
@@ -107,9 +107,9 @@ def auth_page(driver):
 
 
 @pytest.fixture
-def registration_page(driver, credentials, auth_page):
+def registration_page(driver, credentials_without_cabinet, auth_page):
     driver.get(RegistrationPage.url)
-    auth_page.login(*credentials)
+    auth_page.login(*credentials_without_cabinet)
     return RegistrationPage(driver=driver)
 
 
