@@ -1,7 +1,8 @@
 from selenium.webdriver.common.by import By
+from ui.locators.base_page_locators import BasePageLocators
 
 
-class AuthLocators:
+class AuthPageLocators(BasePageLocators):
     MAIL_RU_AUTH_BUTTON = (By.XPATH, "//*[@data-test-id='oAuthService_mail_ru']")
     MAIL_RU_LOGIN = (By.NAME, 'username')
     MAIL_RU_PASSWORD = (By.NAME, "password")

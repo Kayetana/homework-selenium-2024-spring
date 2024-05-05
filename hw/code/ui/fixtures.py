@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from ui.pages.auth_page import AuthPage
 from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
 from ui.pages.news_page import NewsPage
@@ -88,16 +89,9 @@ def partner_page(driver):
     return PartnerPage(driver=driver)
 
 
-@pytest.fixture
-def registration_page(driver):
-    driver.get(RegistrationPage.url)
-    return RegistrationPage(driver=driver)
-
-
 @pytest.fixture(scope='session')
 def credentials():
     load_dotenv()
-    print('creds', os.getenv('LOGIN'), os.getenv('PASSWORD'))
     return os.getenv('LOGIN'), os.getenv('PASSWORD')
 
 
@@ -108,36 +102,43 @@ def credentials_with_cabinet():
 
 
 @pytest.fixture
-def registration_new_page(registration_page, credentials):
-    registration_page.login(*credentials)
-    registration_page.go_to_new_cabinet_registration()
+def auth_page(driver):
+    return AuthPage(driver=driver)
 
 
 @pytest.fixture
-def cabinet_page(credentials_with_cabinet, driver, registration_page):
-    registration_page.login(*credentials_with_cabinet)
+def registration_page(driver, credentials, auth_page):
+    driver.get(RegistrationPage.url)
+    auth_page.login(*credentials)
+    return RegistrationPage(driver=driver)
+
+
+@pytest.fixture
+def cabinet_page(driver, credentials_with_cabinet, auth_page):
+    driver.get(RegistrationPage.url)
+    auth_page.login(*credentials_with_cabinet)
     return CabinetPage(driver=driver)
 
 
 @pytest.fixture
-def campaigns_page(cabinet_page):
-    cabinet_page.driver.get(CampaignsPage.url)
-    return CampaignsPage(driver=cabinet_page.driver)
+def campaigns_page(driver, cabinet_page):
+    driver.get(CampaignsPage.url)
+    return CampaignsPage(driver=driver)
 
 
 @pytest.fixture
-def audience_page(cabinet_page):
-    cabinet_page.driver.get(AudiencePage.url)
-    return AudiencePage(driver=cabinet_page.driver)
+def audience_page(driver, cabinet_page):
+    driver.get(AudiencePage.url)
+    return AudiencePage(driver=driver)
 
 
 @pytest.fixture
-def budget_page(cabinet_page):
-    cabinet_page.driver.get(BudgetPage.url)
-    return BudgetPage(driver=cabinet_page.driver)
+def budget_page(driver, cabinet_page):
+    driver.get(BudgetPage.url)
+    return BudgetPage(driver=driver)
 
 
 @pytest.fixture
-def settings_page(cabinet_page):
-    cabinet_page.driver.get(SettingsPage.url)
-    return SettingsPage(driver=cabinet_page.driver)
+def settings_page(driver, cabinet_page):
+    driver.get(SettingsPage.url)
+    return SettingsPage(driver=driver)

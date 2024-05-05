@@ -5,8 +5,6 @@ from ui.locators.base_page_locators import BasePageLocators
 class RegistrationPageLocators(BasePageLocators):
     CREATE_NEW_CABINET_BUTTON = (By.ID, "click-createNewButton")
 
-
-class RegistrationNewPageLocators(BasePageLocators):
     @staticmethod
     def LANGUAGE_BUTTON(language):
         return By.XPATH, f"//*[contains(@class, 'vkuiSegmentedControlOption')]/h4[text()='{language}']"
