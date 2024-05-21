@@ -4,7 +4,7 @@ left_menu_sections = [
     ('Аудитории', 'https://ads.vk.com/hq/audience'),
     ('Бюджет', 'https://ads.vk.com/hq/budget/transactions'),
     ('Центр коммерции', 'https://ads.vk.com/hq/ecomm/catalogs'),
-    ('Лид-формы', 'https://ads.vk.com/hq/leadads/leadforms'),
+    ('Лид-формы и опросы', 'https://ads.vk.com/hq/leadads/leadforms'),
     ('Настройки', 'https://ads.vk.com/hq/settings'),
     ('Обзор', 'https://ads.vk.com/hq/overview'),
 ]
@@ -15,6 +15,7 @@ class TestCabinetPage(BaseCase):
         for section_name, url in left_menu_sections:
             cabinet_page.click_left_menu(section_name)
             assert self.is_opened(url)
+            cabinet_page.click_close_button_if_education_is_offered()
 
     def test_replenishment_modal_page_became_visible(self, cabinet_page):
         cabinet_page.click_balance_button()
