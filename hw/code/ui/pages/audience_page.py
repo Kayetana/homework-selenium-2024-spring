@@ -75,6 +75,5 @@ class AudiencePage(BasePage):
 
     def delete_audience(self):
         self.hover(self.locators.AUDIENCE_OPTIONS_BUTTON)
-        # time.sleep(2)
         self.click(self.locators.AUDIENCE_DELETE_BUTTON)
         self.click(self.locators.AUDIENCE_CONFIRM_DELETE_BUTTON)

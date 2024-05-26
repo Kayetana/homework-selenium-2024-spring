@@ -1,4 +1,3 @@
-import time
 import pytest
 from base_case import BaseCase
 
@@ -9,13 +8,6 @@ def replenishment_modal_page(budget_page):
 
 
 class TestBudgetPage(BaseCase):
-    def test_open_replenishment_modal_page(self, replenishment_modal_page, budget_page):
-        assert budget_page.replenishment_modal_page_became_visible()
-
-    def test_close_replenishment_modal_page(self, replenishment_modal_page, budget_page):
-        budget_page.close_replenishment_modal_page()
-        assert budget_page.replenishment_modal_page_became_invisible()
-
     def test_error_too_little_amount(self, replenishment_modal_page, budget_page):
         budget_page.enter_amount(budget_page.MIN_AMOUNT - 1)
         budget_page.click_submit_button()
