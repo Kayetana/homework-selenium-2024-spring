@@ -80,8 +80,8 @@ class TestLeadFormsPage(BaseCase):
 
         assert leadforms_page.get_result_title_on_preview() == RESULT_TITLE
         assert leadforms_page.get_result_description_on_preview() == RESULT_DESCRIPTION
-        assert leadforms_page.is_call_button_is_displayed_on_preview()
-        assert leadforms_page.is_site_button_is_displayed_on_preview()
+        assert leadforms_page.is_call_button_displayed_on_preview()
+        assert leadforms_page.is_site_button_displayed_on_preview()
 
         leadforms_page.delete_uploaded_images()
 

@@ -16,9 +16,6 @@ class AudiencePage(BasePage):
     def click_create_audience_button(self):
         self.click(self.locators.CREATE_AUDIENCE_BUTTON)
 
-    def create_audience_modal_page_became_visible(self) -> bool:
-        return self.became_visible(self.locators.CREATE_AUDIENCE_MODAL_PAGE)
-
     def get_default_audience_name(self):
         return self.find(self.locators.AUDIENCE_NAME_INPUT).get_attribute('value')
 
@@ -33,9 +30,6 @@ class AudiencePage(BasePage):
 
     def click_add_source_button(self):
         self.click(self.locators.ADD_SOURCE_BUTTON)
-
-    def add_source_modal_page_became_visible(self) -> bool:
-        return self.became_visible(self.locators.ADD_SOURCE_MODAL_PAGE)
 
     def select_source(self, source_name):
         self.click(self.locators.SOURCE_ITEM(source_name))
@@ -56,3 +50,8 @@ class AudiencePage(BasePage):
 
     def get_created_audience_title(self) -> str:
         return self.find(self.locators.CREATED_AUDIENCE_TITLE).text
+
+    def delete_audience(self):
+        self.hover(self.locators.AUDIENCE_OPTIONS_BUTTON)
+        self.click(self.locators.AUDIENCE_DELETE_BUTTON)
+        self.click(self.locators.AUDIENCE_CONFIRM_DELETE_BUTTON)

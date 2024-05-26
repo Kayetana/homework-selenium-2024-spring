@@ -159,10 +159,10 @@ class LeadFormsPage(BasePage):
     def get_result_description_on_preview(self) -> str:
         return self.find(self.locators.RESULT_DESCRIPTION_ON_PREVIEW).text
 
-    def is_call_button_is_displayed_on_preview(self) -> bool:
+    def is_call_button_displayed_on_preview(self) -> bool:
         return self.became_visible(self.locators.CALL_BUTTON_ON_PREVIEW)
 
-    def is_site_button_is_displayed_on_preview(self) -> bool:
+    def is_site_button_displayed_on_preview(self) -> bool:
         return self.became_visible(self.locators.SITE_BUTTON_ON_PREVIEW)
 
     def fill_fourth_step(self, notifications_email: str, full_name: str, address: str, email: str, inn: str):
