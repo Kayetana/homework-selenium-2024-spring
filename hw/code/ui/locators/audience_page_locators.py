@@ -14,14 +14,35 @@ class AudiencePageLocators(BasePageLocators):
     def SOURCE_ITEM(item_name):
         return By.XPATH, f"//*[contains(@class, 'SourceTypeSelector_button__')]//*[text()='{item_name}']"
 
-    KEY_PHRASES_INPUT = (By.XPATH, "//*[contains(@class, 'KeyPhrases_textarea__')]/textarea")
+    SOURCE_TITLE_INPUT = (
+        By.XPATH,
+        "//*[contains(@class, 'vkuiInput') and preceding-sibling::h5[text()='Название']]/input"
+    )
+
+    KEY_PHRASES_INPUT = (
+        By.XPATH,
+        "//*[contains(@class, 'KeyPhrases_') and preceding-sibling::h5//*[text()='Ключевые фразы']]//textarea"
+    )
+
+    NEGATIVE_PHRASES_INPUT = (
+        By.XPATH,
+        "//*[contains(@class, 'KeyPhrases_') and preceding-sibling::h5//*[text()='Минус-фразы']]//textarea"
+    )
+
+    SEARCH_PERIOD_INPUT = (By.XPATH, "//*[contains(@class, 'ContextForm_daysInput__')]/input")
+
+    # source card
+    SOURCE_TITLE_ON_CARD = (
+        By.XPATH,
+        "//*[contains(@class, 'SourceListItem_')]/*[contains(@class, 'Header_header__')]/h4"
+    )
+
+    SOURCE_CONTENT_ON_CARD = (
+        By.XPATH,
+        "//*[contains(@class, 'SourceListItem_')]//*[contains(@class, 'InfoRow_content__')]"
+    )
 
     MODAL_PAGE_SUBMIT_BUTTON = (By.XPATH, "//*[contains(@class, 'vkuiTappable--hasActive') and @type='submit']")
-
-    SOURCE_CARD_CONTENT = (
-        By.XPATH,
-        "//*[contains(@class, 'SourcesList_wrapper__')]//*[contains(@class, 'InfoRow_content__')]"
-    )
 
     CREATED_AUDIENCE_TITLE = (By.XPATH, "//*[contains(@class, 'NameCell_wrapper__')]/h5")
 
