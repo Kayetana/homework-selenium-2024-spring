@@ -1,5 +1,3 @@
-import time
-
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
@@ -74,7 +72,6 @@ class CampaignsPage(BasePage):
         self.click(self.locators.TEXT_ON_BUTTON_ITEM(text_on_button))
 
         load_image_input = self.find(self.locators.LOAD_IMAGE_INPUT)
-        time.sleep(3)
         load_image_input.send_keys(filepath)
 
     def get_preview_title(self) -> str:

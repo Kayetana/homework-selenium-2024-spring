@@ -29,12 +29,6 @@ class TestFooter(BaseCase):
         main_page.go_to_new_tab()
         assert self.is_opened('https://vk.company/ru/company/business/')
 
-    def test_open_language_dropdown(self, main_page):
-        main_page.open_language_dropdown()
-
-        dropdown_items = ['English', 'Русский']
-        assert main_page.language_dropdown_contain_items(dropdown_items)
-
     def test_change_language(self, main_page):
         main_page.change_language('English')
         assert main_page.get_selected_language_from_footer() == 'EN'

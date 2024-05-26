@@ -1,3 +1,5 @@
+from selenium.common import TimeoutException
+
 from ui.pages.base_page import BasePage
 from ui.locators.partner_page_locators import PartnerPageLocators
 
@@ -33,10 +35,10 @@ class PartnerPage(BasePage):
 
     def page_contain_formats(self, item_names: list) -> bool:
         for item_name in item_names:
-            item = self.find(self.locators.FORMAT_ITEM_TITLE(item_name))
-            if item is None:
+            try:
+                self.find(self.locators.FORMAT_ITEM_TITLE(item_name))
+            except TimeoutException:
                 return False
-
         return True
 
     def submit_button_is_disabled(self):

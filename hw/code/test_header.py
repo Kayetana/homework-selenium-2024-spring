@@ -25,18 +25,6 @@ class TestHeader(BaseCase):
             main_page.go_to_new_tab()
         assert self.is_opened(url)
 
-    def test_open_education_dropdown(self, main_page):
-        main_page.open_education_dropdown()
-
-        dropdown_items = [
-            'Полезные материалы',
-            'Мероприятия',
-            'Видеокурсы',
-            'Сертификация'
-        ]
-
-        assert main_page.education_dropdown_contain_items(dropdown_items)
-
     @pytest.mark.parametrize("item_name,url,open_in_new_tab", [
         ('Полезные материалы', 'https://ads.vk.com/insights', False),
         ('Мероприятия', 'https://ads.vk.com/events', False),
