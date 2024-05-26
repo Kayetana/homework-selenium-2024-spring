@@ -31,7 +31,6 @@ class AudiencePageLocators(BasePageLocators):
 
     SEARCH_PERIOD_INPUT = (By.XPATH, "//*[contains(@class, 'ContextForm_daysInput__')]/input")
 
-    # source card
     SOURCE_TITLE_ON_CARD = (
         By.XPATH,
         "//*[contains(@class, 'SourceListItem_')]/*[contains(@class, 'Header_header__')]/h4"
@@ -42,7 +41,15 @@ class AudiencePageLocators(BasePageLocators):
         "//*[contains(@class, 'SourceListItem_')]//*[contains(@class, 'InfoRow_content__')]"
     )
 
-    MODAL_PAGE_SUBMIT_BUTTON = (By.XPATH, "//*[contains(@class, 'vkuiTappable--hasActive') and @type='submit']")
+    SUBMIT_SOURCE_BUTTON = (
+        By.XPATH,
+        "//div[contains(@class, 'ModalSidebarPage_container__')]//*[@data-testid='submit']"
+    )
+
+    SUBMIT_AUDIENCE_BUTTON = (
+        By.XPATH,
+        "//form[contains(@class, 'ModalSidebarPage_container__')]//*[@data-testid='submit']"
+    )
 
     CREATED_AUDIENCE_TITLE = (By.XPATH, "//*[contains(@class, 'NameCell_wrapper__')]/h5")
 

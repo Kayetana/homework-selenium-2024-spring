@@ -1,3 +1,5 @@
+from selenium.common import TimeoutException
+
 from ui.pages.base_page import BasePage
 from ui.locators.upvote_page_locators import UpvotePageLocators
 from selenium.webdriver.common.keys import Keys
@@ -72,8 +74,8 @@ class UpvotePage(BasePage):
 
     def filter_dropdown_contain_items(self, item_names: list) -> bool:
         for item_name in item_names:
-            item = self.find(self.locators.FILTER_OPTION(item_name))
-            if item is None:
+            try:
+                self.find(self.locators.FILTER_OPTION(item_name))
+            except TimeoutException:
                 return False
-
-            return True
+        return True

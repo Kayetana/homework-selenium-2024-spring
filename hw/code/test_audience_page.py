@@ -26,9 +26,11 @@ class TestAudiencePage(BaseCase):
 
     def test_create_audience(self, audience_page):
         audience_page.click_create_audience_button()
+
         audience_page.add_key_phrases_source(SOURCE_TITLE, KEY_PHRASES, NEGATIVE_PHRASES, SEARCH_PERIOD_IN_DAYS)
         audience_page.enter_audience_name(CUSTOM_AUDIENCE_NAME)
-        audience_page.click_modal_page_submit_button()
+        audience_page.click_submit_audience_button()
+
         assert audience_page.get_created_audience_title() == CUSTOM_AUDIENCE_NAME
 
         audience_page.delete_audience()

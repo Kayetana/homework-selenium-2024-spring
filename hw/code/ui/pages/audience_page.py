@@ -1,7 +1,3 @@
-import time
-
-from selenium.common import TimeoutException
-from selenium.webdriver import Keys
 from ui.pages.base_page import BasePage
 from ui.locators.audience_page_locators import AudiencePageLocators
 from datetime import datetime
@@ -22,7 +18,6 @@ class AudiencePage(BasePage):
         elem = self.find(self.locators.AUDIENCE_NAME_INPUT)
         elem.clear()
         elem.send_keys(audience_name)
-        elem.send_keys(Keys.ENTER)
 
     def get_error(self) -> str:
         return self.find(self.locators.ERROR).text
@@ -47,13 +42,13 @@ class AudiencePage(BasePage):
         search_period_input.clear()
         search_period_input.send_keys(str(search_period))
 
-        self.click_modal_page_submit_button()
+        self.click_submit_source_button()
 
-    def click_modal_page_submit_button(self):
-        try:
-            self.click(self.locators.MODAL_PAGE_SUBMIT_BUTTON)
-        except TimeoutException:
-            pass
+    def click_submit_source_button(self):
+        self.scroll_and_click(self.locators.SUBMIT_SOURCE_BUTTON)
+
+    def click_submit_audience_button(self):
+        self.scroll_and_click(self.locators.SUBMIT_AUDIENCE_BUTTON)
 
     def get_source_title_on_card(self) -> str:
         return self.find(self.locators.SOURCE_TITLE_ON_CARD).text
