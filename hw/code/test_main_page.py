@@ -31,7 +31,7 @@ class TestMainPage(BaseCase):
         case_title = main_page.get_case_title()
         main_page.click_case_item()
         assert self.is_opened('https://ads.vk.com/cases')
-        assert case_title in self.driver.page_source
+        assert case_title in self.get_driver().page_source
 
     def test_go_to_webinar(self, main_page):
         main_page.click_webinar_item()

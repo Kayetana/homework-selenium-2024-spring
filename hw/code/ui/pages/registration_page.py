@@ -1,3 +1,4 @@
+from selenium.common import TimeoutException
 from ui.pages.base_page import BasePage
 from ui.locators.registration_page_locators import RegistrationPageLocators
 
@@ -9,9 +10,6 @@ class RegistrationPage(BasePage):
     def click_create_new_cabinet_button(self):
         self.click(self.locators.CREATE_NEW_CABINET_BUTTON)
 
-    def get_selected_language(self) -> str:
-        return self.find(self.locators.SELECTED_LANGUAGE).text
-
     def select_language(self, language: str):
         self.click(self.locators.LANGUAGE_BUTTON(language))
 
@@ -19,14 +17,14 @@ class RegistrationPage(BasePage):
         self.click(self.locators.COUNTRY_DROPDOWN)
         self.click(self.locators.COUNTRY_DROPDOWN_ITEM(country_name))
 
-    def currency_dropdown_contain_items(self, item_names: list):
+    def currency_dropdown_contain_items(self, item_names: list) -> bool:
         self.click(self.locators.CURRENCY_DROPDOWN)
         for item_name in item_names:
-            item = self.find(self.locators.CURRENCY_DROPDOWN_ITEM(item_name))
-            if item is None:
+            try:
+                self.find(self.locators.CURRENCY_DROPDOWN_ITEM(item_name))
+            except TimeoutException:
                 return False
-
-            return True
+        return True
 
     def click_submit_button(self):
         self.scroll_and_click(self.locators.SUBMIT_BUTTON)

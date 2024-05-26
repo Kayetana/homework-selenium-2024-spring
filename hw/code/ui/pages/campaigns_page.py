@@ -1,5 +1,3 @@
-import time
-
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
@@ -23,14 +21,11 @@ class CampaignsPage(BasePage):
         except TimeoutException:
             pass
 
-    def click_create_campaign(self):
+    def click_create_campaign_button(self):
         self.click(self.locators.CREATE_CAMPAIGN_BUTTON)
 
     def select_site(self):
-        self.click(self.locators.SITE)
-
-    def site_input_became_visible(self) -> bool:
-        return self.became_visible(self.locators.SITE_INPUT)
+        self.click(self.locators.SITE_BUTTON)
 
     def get_error(self) -> str:
         return self.find(self.locators.ERROR).text
@@ -44,46 +39,23 @@ class CampaignsPage(BasePage):
         elem.send_keys(url)
         elem.send_keys(Keys.ENTER)
 
-    def options_became_visible(self) -> bool:
-        return (self.became_visible(self.locators.GOAL_DROPDOWN)
-                and self.became_visible(self.locators.STRATEGY_DROPDOWN)
-                and self.became_visible(self.locators.BUDGET_INPUT)
-                and self.became_visible(self.locators.DATES))
-
-    def get_start_date(self) -> str | None:
-        return self.find(self.locators.START_DATE).get_attribute('value')
-
-    def enter_budget_amount(self, amount: str | int):
+    def enter_budget_amount(self, amount: str):
         elem = self.find(self.locators.BUDGET_INPUT)
         elem.clear()
         elem.send_keys(amount)
 
-    def is_active_step(self, step_name: str):
-        try:
-            self.find(self.locators.ACTIVE_STEP(step_name))
-            return True
-        except TimeoutException:
-            return False
+    def fill_second_step(self, region: str, gender: str):
+        region_input = self.find(self.locators.REGION_INPUT)
+        region_input.clear()
+        region_input.send_keys(region)
+        self.click(self.locators.REGION_SEARCH_RESULTS)
 
-    def select_regions(self):
-        self.click(self.locators.REGION_QUICK_SELECTION)
+        self.click(self.locators.SECTION_DEMOGRAPHY)
+        self.click(self.locators.GENDER_BUTTON(gender))
+        self.click(self.locators.DO_NOT_ADD_UTM_TAGS_BUTTON)
 
-    def get_panel_title(self) -> str:
-        return self.find(self.locators.PANEL_TITLE).text
-
-    def click_media_button(self):
-        self.click(self.locators.MEDIA_BUTTON)
-
-    def select_image(self):
-        self.click(self.locators.GENERATED_IMAGES_TAB)
-        self.click(self.locators.IMAGE_ITEM)
-
-    def is_image_selected(self) -> bool:
-        try:
-            self.find(self.locators.SELECTED_IMAGE)
-            return True
-        except TimeoutException:
-            return False
+    def get_displayed_region(self) -> str:
+        return self.find(self.locators.REGION_SELECTED_AND_DISPLAYED).text
 
     def enter_title_and_description(self, title: str, description: str):
         elem = self.find(self.locators.TITLE)
@@ -94,11 +66,46 @@ class CampaignsPage(BasePage):
         elem.clear()
         elem.send_keys(description)
 
+    def fill_third_step(self, title: str, description: str, text_on_button: str, filepath: str):
+        self.enter_title_and_description(title, description)
+        self.click(self.locators.TEXT_ON_BUTTON_DROPDOWN)
+        self.click(self.locators.TEXT_ON_BUTTON_ITEM(text_on_button))
+
+        load_image_input = self.find(self.locators.LOAD_IMAGE_INPUT)
+        load_image_input.send_keys(filepath)
+
     def get_preview_title(self) -> str:
-        return self.find(self.locators.PREVIEW_TITLE).text
+        return self.find(self.locators.TITLE_ON_PREVIEW).text
 
     def get_preview_description(self) -> str:
-        return self.find(self.locators.PREVIEW_DESCRIPTION).text
+        return self.find(self.locators.DESCRIPTION_ON_PREVIEW).text
+
+    def is_button_displayed_on_preview(self, text_on_button: str) -> bool:
+        return self.became_visible(self.locators.BUTTON_ON_PREVIEW(text_on_button))
+
+    def is_video_displayed_on_preview(self) -> bool:
+        return self.became_visible(self.locators.VIDEO_ON_PREVIEW, timeout=10)
+
+    def is_images_group_displayed(self) -> bool:
+        return self.became_visible(self.locators.IMAGES_GROUP)
 
     def click_publish_button(self):
         self.click(self.locators.PUBLISH_BUTTON)
+
+    def confirm_publish(self):
+        try:
+            self.click(self.locators.CONFIRM_PUBLISH_BUTTON)
+        except TimeoutException:
+            pass
+
+    def get_created_campaign_name(self) -> str:
+        return self.find(self.locators.CAMPAIGN_ITEM).text
+
+    def get_created_campaign_budget(self) -> int:
+        budget = self.find(self.locators.CAMPAIGN_ITEM_BUDGET).text
+        return int(''.join(symbol for symbol in budget if str.isdigit(symbol)))
+
+    def delete_campaign(self):
+        self.hover(self.locators.CAMPAIGN_ITEM)
+        self.hover(self.locators.OPTIONS_ITEM)
+        self.click(self.locators.DELETE_CAMPAIGN_BUTTON)

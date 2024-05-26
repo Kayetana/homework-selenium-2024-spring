@@ -15,6 +15,7 @@ from ui.pages.audience_page import AudiencePage
 from ui.pages.campaigns_page import CampaignsPage
 from ui.pages.budget_page import BudgetPage
 from ui.pages.settings_page import SettingsPage
+from ui.pages.leadforms_page import LeadFormsPage
 import os
 from dotenv import load_dotenv
 
@@ -142,3 +143,9 @@ def budget_page(driver, cabinet_page):
 def settings_page(driver, cabinet_page):
     driver.get(SettingsPage.url)
     return SettingsPage(driver=driver)
+
+
+@pytest.fixture
+def leadforms_page(driver, cabinet_page):
+    driver.get(LeadFormsPage.url)
+    return LeadFormsPage(driver=driver)

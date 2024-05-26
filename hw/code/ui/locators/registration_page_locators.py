@@ -9,8 +9,6 @@ class RegistrationPageLocators(BasePageLocators):
     def LANGUAGE_BUTTON(language):
         return By.XPATH, f"//*[contains(@class, 'vkuiSegmentedControlOption')]/h4[text()='{language}']"
 
-    SELECTED_LANGUAGE = (By.XPATH, "//*[contains(@class, 'vkuiSegmentedControlOption--checked')]/h4")
-
     COUNTRY_DROPDOWN = (By.XPATH, f"//*[@data-testid='country']")
 
     @staticmethod

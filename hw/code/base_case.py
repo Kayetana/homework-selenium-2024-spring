@@ -22,3 +22,9 @@ class BaseCase:
         except:
             raise PageNotOpenedException(
                 f'{url} did not open in {timeout} sec, current url {self.driver.current_url}')
+
+    def load_url(self, url):
+        self.driver.get(url)
+
+    def get_driver(self):
+        return self.driver

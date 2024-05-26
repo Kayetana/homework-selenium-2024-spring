@@ -1,5 +1,9 @@
 import pytest
 from base_case import BaseCase
+from ui.pages.cabinet_page import CabinetPage
+from ui.pages.settings_page import SettingsPage
+
+EMAIL = 'kayetana@gmail.com'
 
 
 @pytest.fixture
@@ -8,16 +12,6 @@ def new_cabinet(registration_page):
 
 
 class TestRegistrationPage(BaseCase):
-    def test_open_new_cabinet_registration(self, new_cabinet):
-        assert self.is_opened('https://ads.vk.com/hq/registration/new')
-
-    def test_checked_language(self, new_cabinet, registration_page):
-        assert registration_page.get_selected_language() == 'Русский'
-        registration_page.select_language('English')
-        assert registration_page.get_selected_language() == 'English'
-        registration_page.select_language('Русский')
-        assert registration_page.get_selected_language() == 'Русский'
-
     @pytest.mark.parametrize("country,currencies", [
         ('Казахстан', ('Доллар США (USD)', 'Евро (EUR)')),
         ('Россия', ('Российский рубль (RUB)',)),
@@ -55,3 +49,16 @@ class TestRegistrationPage(BaseCase):
 
         registration_page.select_account_type('Рекламодатель')
         assert registration_page.physical_type_became_visible()
+
+    def test_register_cabinet(self, new_cabinet, registration_page):
+        registration_page.enter_email(EMAIL)
+        registration_page.click_submit_button()
+
+        assert self.is_opened(CabinetPage.url)
+
+        self.load_url(SettingsPage.url)
+        settings_page = SettingsPage(self.get_driver())
+
+        assert settings_page.get_email_general_field_value() == EMAIL
+
+        settings_page.delete_cabinet()

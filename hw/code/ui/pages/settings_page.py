@@ -21,15 +21,16 @@ class SettingsPage(BasePage):
     def get_full_name_field_value(self) -> str:
         return self.find(self.locators.FULL_NAME_INPUT).get_attribute('value')
 
-    def save_and_cancel_buttons_became_visible(self) -> bool:
-        return (self.became_visible(self.locators.SAVE_BUTTON)
-                and self.became_visible(self.locators.CANCEL_BUTTON))
+    def get_email_general_field_value(self) -> str:
+        return self.find(self.locators.EMAIL_GENERAL_INPUT).get_attribute('value')
+
+    def get_inn_field_value(self) -> str:
+        return self.find(self.locators.INN_INPUT).get_attribute('value')
 
     def enter_phone_number(self, phone_number: str):
         phone_number_input = self.find(self.locators.PHONE_NUMBER_INPUT)
         phone_number_input.clear()
         phone_number_input.send_keys(phone_number)
-        phone_number_input.send_keys(Keys.ENTER)
 
     def get_phone_number_error(self) -> str:
         return self.find(self.locators.PHONE_NUMBER_ERROR).text
@@ -44,7 +45,6 @@ class SettingsPage(BasePage):
         email_input = self.find(self.locators.ADDITIONAL_EMAIL_INPUT(counter))
         email_input.clear()
         email_input.send_keys(email)
-        email_input.send_keys(Keys.ENTER)
 
     def get_email_error(self) -> str:
         return self.find(self.locators.EMAIL_ERROR).text
@@ -56,7 +56,6 @@ class SettingsPage(BasePage):
         inn_input = self.find(self.locators.INN_INPUT)
         inn_input.clear()
         inn_input.send_keys(inn)
-        inn_input.send_keys(Keys.ENTER)
 
     def get_inn_error(self) -> str:
         return self.find(self.locators.INN_ERROR).text
@@ -67,15 +66,12 @@ class SettingsPage(BasePage):
     def logout_devices_success_message_became_visible(self) -> bool:
         return self.became_visible(self.locators.LOGOUT_OTHER_DEVICES_SUCCESS_MESSAGE)
 
-    def click_delete_cabinet_button(self):
-        self.click(self.locators.DELETE_CABINET_BUTTON)
-
-    def delete_cabinet_modal_page_became_visible(self) -> bool:
-        return self.became_visible(self.locators.DELETE_CABINET_MODAL_PAGE)
-
     def click_save_button(self):
-        self.click(self.locators.SAVE_BUTTON)
+        self.scroll_and_click(self.locators.SAVE_BUTTON)
 
     def click_cancel_button(self):
-        self.click(self.locators.CANCEL_BUTTON)
+        self.scroll_and_click(self.locators.CANCEL_BUTTON)
 
+    def delete_cabinet(self):
+        self.scroll_and_click(self.locators.DELETE_CABINET_BUTTON)
+        self.click(self.locators.CONFIRM_DELETE_CABINET_BUTTON)
