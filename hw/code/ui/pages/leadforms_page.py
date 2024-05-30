@@ -195,6 +195,4 @@ class LeadFormsPage(BasePage):
         self.hover(self.locators.LEADFORM_ITEM)
         self.click(self.locators.DELETE_LEADFORM_BUTTON)
         self.click(self.locators.CONFIRM_DELETE_BUTTON)
-
-    def wait_until_leadform_deleted(self):
         self.wait().until(ec.invisibility_of_element(self.locators.LEADFORM_ITEM))

@@ -3,6 +3,7 @@ from selenium.webdriver import Keys
 
 from ui.pages.base_page import BasePage
 from ui.locators.campaigns_page_locators import CampaignsPageLocators
+from selenium.webdriver.support import expected_conditions as ec
 
 
 class CampaignsPage(BasePage):
@@ -109,3 +110,4 @@ class CampaignsPage(BasePage):
         self.hover(self.locators.CAMPAIGN_ITEM)
         self.hover(self.locators.OPTIONS_ITEM)
         self.click(self.locators.DELETE_CAMPAIGN_BUTTON)
+        self.wait().until(ec.invisibility_of_element(self.locators.CAMPAIGN_ITEM))

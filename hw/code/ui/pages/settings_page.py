@@ -1,4 +1,4 @@
-from selenium.webdriver import Keys
+from selenium.webdriver.support import expected_conditions as ec
 from ui.pages.base_page import BasePage
 from ui.locators.settings_page_locators import SettingsPageLocators
 
@@ -75,3 +75,4 @@ class SettingsPage(BasePage):
     def delete_cabinet(self):
         self.scroll_and_click(self.locators.DELETE_CABINET_BUTTON)
         self.click(self.locators.CONFIRM_DELETE_CABINET_BUTTON)
+        self.wait().until(ec.invisibility_of_element(self.locators.DELETE_MODAL_PAGE))
