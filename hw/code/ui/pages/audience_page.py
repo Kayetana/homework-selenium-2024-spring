@@ -1,6 +1,7 @@
 from ui.pages.base_page import BasePage
 from ui.locators.audience_page_locators import AudiencePageLocators
 from datetime import datetime
+from selenium.webdriver.support import expected_conditions as ec
 
 
 class AudiencePage(BasePage):
@@ -72,3 +73,6 @@ class AudiencePage(BasePage):
         self.hover(self.locators.AUDIENCE_OPTIONS_BUTTON)
         self.click(self.locators.AUDIENCE_DELETE_BUTTON)
         self.click(self.locators.AUDIENCE_CONFIRM_DELETE_BUTTON)
+
+    def wait_until_audience_deleted(self):
+        self.wait().until(ec.invisibility_of_element(self.locators.CREATED_AUDIENCE_TITLE))

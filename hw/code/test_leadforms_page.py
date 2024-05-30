@@ -91,3 +91,4 @@ class TestLeadFormsPage(BaseCase):
         assert leadforms_page.get_created_leadform_name() == LEADFORM_NAME
 
         leadforms_page.delete_leadform()
+        leadforms_page.wait_until_leadform_deleted()
